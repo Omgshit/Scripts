@@ -44,6 +44,9 @@ elseif game.PlaceId == 100222912269336 or game.PlaceId == 84188796720288 then
 elseif game.PlaceId == 16498193900 then
     print ("Lootify")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/Lootify"))()
+elseif game.PlaceId == 8349889591 or game.PlaceId == 14229762361 or game.PlaceId == 14229839966 or game.PlaceId == 14918509670 or game.PlaceId == 8304191830 then
+    print ("Anime Adventures")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/AnimeAdventures.lua"))()
 elseif game.PlaceId == 16906029391 then
     print ("Ez Venture")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/AnimeVenture"))()
