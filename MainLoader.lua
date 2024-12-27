@@ -32,7 +32,7 @@ elseif game.PlaceId == 13601434903 then
 elseif game.PlaceId == 94801184757522 then
     print ("Piecs jujutusu duc")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/Jujutsu%20piece"))()
-elseif game.PlaceId == 125941597825997 or game.PlaceId == 16379688837 or game.PlaceId == 16379684339 or game.PlaceId == 10450270085 then
+elseif game.PlaceId == 125941597825997 or game.PlaceId == 16379688837 or game.PlaceId == 16379684339 or game.PlaceId == 10450270085 or game.PlaceId == 78904562518018 or game.PlaceId == 119359147980471 then
     print ("Jujutsu Infinite")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/JujutsuInfinite"))()
 elseif game.PlaceId == 19001778364 or game.PlaceId == 107410502434648 or game.PlaceId == 17083240635 then
