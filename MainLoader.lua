@@ -26,6 +26,9 @@ elseif game.PlaceId == 10260193230 or game.PlaceId == 11487720177 then
     print ("Meme Suck")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Meme%20Sea"))()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Adm.lua"))()
+elseif game.PlaceId == 16347800591 then
+    print ("Anime Royale")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/AnimeRoyale"))()
 elseif game.PlaceId == 13601434903 then
     print ("Sorcerer Battlegrounds")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Sorcerer%20Battleground"))()
