@@ -428,16 +428,15 @@ if game.Players.LocalPlayer.Name == "mayconOM12" then
 game.Players.LocalPlayer:Kick("Foi Bom Vida Mais Scams N Podem Dura rs")
 end
 
+if game.PlaceId ~= 7449423635 or game.PlaceId ~= 4442272183 or game.PlaceId ~= 2753915549 then
 if not game.CoreGui:FindFirstChild("ThunderScreen") then
 local ThunderScreen = Instance.new("ScreenGui")
 local ThunderToggleUI = Instance.new("TextButton")
 local ThunderCornerUI = Instance.new("UICorner")
 local ThunderImageUI = Instance.new("ImageLabel")
-
 ThunderScreen.Name = "Copy Discord Link (New Link)"
 ThunderScreen.Parent = game.CoreGui
 ThunderScreen.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
 ThunderToggleUI.Name = "ThunderToggleUI"
 ThunderToggleUI.Parent = ThunderScreen
 ThunderToggleUI.BackgroundColor3 = Color3.fromRGB(244, 244, 0)
@@ -448,10 +447,10 @@ ThunderToggleUI.Text = "Copy Discord Link (New Link)"
 ThunderToggleUI.TextColor3 = Color3.fromRGB(0, 0, 0)
 ThunderToggleUI.TextSize = 19
 ThunderToggleUI.Draggable = true
-
 ThunderToggleUI.MouseButton1Click:Connect(function()
     setclipboard("https://discord.gg/TdStSqtM8p")
 end)
+end
 end
 
 repeat
