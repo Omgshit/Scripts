@@ -428,7 +428,7 @@ if game.Players.LocalPlayer.Name == "mayconOM12" then
 game.Players.LocalPlayer:Kick("Foi Bom Vida Mais Scams N Podem Dura rs")
 end
 
-if game.PlaceId ~= 7449423635 or game.PlaceId ~= 4442272183 or game.PlaceId ~= 2753915549 then
+if game.PlaceId ~= 7449423635 and game.PlaceId ~= 4442272183 and game.PlaceId ~= 2753915549 then
 if not game.CoreGui:FindFirstChild("ThunderScreen") then
 local ThunderScreen = Instance.new("ScreenGui")
 local ThunderToggleUI = Instance.new("TextButton")
