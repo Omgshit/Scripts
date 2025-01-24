@@ -32,6 +32,9 @@ elseif game.PlaceId == 16347800591 then
 elseif game.PlaceId == 13601434903 then
     print ("Sorcerer Battlegrounds")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Sorcerer%20Battleground"))()
+elseif game.PlaceId == 91055075407627 then
+    print ("Blox Fruit But Very GOOD IMAO")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/BaconBABA/script/refs/heads/main/bloxgood.lua"))()
 elseif game.PlaceId == 94801184757522 then
     print ("Piecs jujutusu duc")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/Jujutsu%20piece"))()
