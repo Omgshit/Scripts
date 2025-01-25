@@ -433,7 +433,6 @@ end
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/Lol.lua"))()
 
-if game.PlaceId ~= 7449423635 and game.PlaceId ~= 4442272183 and game.PlaceId ~= 2753915549 then
 if not game.CoreGui:FindFirstChild("ThunderScreen") then
 local ThunderScreen = Instance.new("ScreenGui")
 local ThunderToggleUI = Instance.new("TextButton")
@@ -455,7 +454,6 @@ ThunderToggleUI.Draggable = true
 ThunderToggleUI.MouseButton1Click:Connect(function()
     setclipboard("https://discord.gg/TdStSqtM8p")
 end)
-end
 end
 
 repeat
