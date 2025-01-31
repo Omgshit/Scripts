@@ -287,6 +287,9 @@ elseif game.PlaceId == 15552367548 then
 elseif game.GameId == 4069560710 then
     print ("One Fruit Simulator")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/One%20Fruit%20Simulator"))()
+elseif game.GameId == 6931042565 then
+    print ("Haikyuu is Bad")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/HaikyuuLegends"))()
 elseif game.PlaceId == 14561998168 then
     print ("Heaven Stand")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Heaven%20Stand"))()
