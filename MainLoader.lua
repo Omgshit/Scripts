@@ -455,7 +455,7 @@ ThunderToggleUI.Size = UDim2.new(0, 89, 0, 33)
 ThunderToggleUI.Font = Enum.Font.SourceSansSemibold
 ThunderToggleUI.Text = "Copy Discord Link"
 ThunderToggleUI.TextColor3 = Color3.fromRGB(0, 0, 0)
-ThunderToggleUI.TextSize = 19
+ThunderToggleUI.TextSize = 15
 ThunderToggleUI.Draggable = true
 ThunderToggleUI.MouseButton1Click:Connect(function()
     setclipboard("https://discord.gg/TdStSqtM8p")
