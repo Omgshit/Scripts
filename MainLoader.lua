@@ -13,7 +13,7 @@ elseif game.PlaceId == 76098497356508 then
 elseif game.PlaceId == 95295765150201 or game.PlaceId == 72064813230771 then
     print ("New Rock Fruit")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/RockFruitNew"))()
-elseif game.PlaceId == 18668065416 then
+elseif game.GameId == 6325068386 then
     print ("Lock RIVAL")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/BlueLockRivals"))()
 elseif game.PlaceId == 18271034370 then
