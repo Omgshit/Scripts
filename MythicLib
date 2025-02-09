@@ -1174,7 +1174,7 @@ ImageButton1.Draggable = true
 ImageButton1.Image = ""
 local CoreGui = game:GetService("CoreGui")
 ImageButton1.MouseButton1Down:connect(function()
-		CoreGui.MythicLib.Enabled = not CoreGui.MythicLib.Enabled
+		CoreGui.redzlib.Enabled = not CoreGui.redzlib.Enabled
 end)
 
 UICorner.Parent = ImageButton1
