@@ -317,14 +317,9 @@ elseif game.PlaceId == 15088771636 then
 elseif game.PlaceId == 13517464174 then
     print ("Animeverse")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Animeverse"))()
-elseif game.PlaceId == 11756036029 then
+elseif game.GameId == 4161970303 then
     print ("Anime Spirits")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Anime%20Spirits"))()
-elseif game.PlaceId == 15728325012 then
-    print ("Anime Spirits Dungeon")
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Anime%20Spirits"))()
-elseif game.PlaceId == 16041086429 then
-    print ("Anime Spirits 2nd Sea")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Anime%20Spirits"))()
 elseif game.PlaceId == 13667319624 then
     print ("Knockout Simulator")
@@ -419,22 +414,8 @@ elseif game.PlaceId == 11520107397 or game.PlaceId == 6403373529 or game.PlaceId
  elseif game.PlaceId == 6938803436 or game.PlaceId == 6990129309 or game.PlaceId == 6990133340 or game.PlaceId == 6990131029 or game.PlaceId == 7338881230 or game.PlaceId == 7274690025 or game.PlaceId == 6990129309 then
     print ("Anime Dimensions")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Anime%20Dimensions"))()
-end
-
-if game.Players.LocalPlayer.Name == "xxgamexx_gamebr" then
-game.Players.LocalPlayer:Kick("Foi Bom Vida Mais Scams N Podem Dura rs")
-end
-if game.Players.LocalPlayer.Name == "MELIODASMITO77" then
-game.Players.LocalPlayer:Kick("otario")
-end
-if game.Players.LocalPlayer.Name == "Ana_bloxfruit" then
-game.Players.LocalPlayer:Kick("Foi Bom Vida Mais Scams N Podem Dura rs")
-end
-if game.Players.LocalPlayer.Name == "RENATA13523" then
-game.Players.LocalPlayer:Kick("Foi Bom Vida Mais Scams N Podem Dura rs")
-end
-if game.Players.LocalPlayer.Name == "mayconOM12" then
-game.Players.LocalPlayer:Kick("Foi Bom Vida Mais Scams N Podem Dura rs")
+ else
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/NoGameSupport.lua"))()
 end
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/Lol.lua"))()
@@ -455,7 +436,7 @@ ThunderToggleUI.Size = UDim2.new(0, 89, 0, 33)
 ThunderToggleUI.Font = Enum.Font.SourceSansSemibold
 ThunderToggleUI.Text = "Copy Discord Link"
 ThunderToggleUI.TextColor3 = Color3.fromRGB(0, 0, 0)
-ThunderToggleUI.TextSize = 15
+ThunderToggleUI.TextSize = 13
 ThunderToggleUI.Draggable = true
 ThunderToggleUI.MouseButton1Click:Connect(function()
     setclipboard("https://discord.gg/TdStSqtM8p")
