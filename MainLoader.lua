@@ -339,13 +339,7 @@ elseif game.PlaceId == 16365412402 then
 elseif game.PlaceId == 16029997375 then
     print ("Omini X")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/OminiX"))()
-elseif game.PlaceId == 12135640403 then
-    print ("Anime Dungeon Fighters")
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Anime%20Dungeon%20Fighters"))()
-elseif game.PlaceId == 15502802094 then 
-    print ("Anime Dungeon Fighters")
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Anime%20Dungeon%20Fighters"))()
-elseif game.PlaceId == 15742087191 then 
+elseif game.GameId == 4280744785 then
     print ("Anime Dungeon Fighters")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/Anime%20Dungeon%20Fighters"))()
 elseif game.PlaceId == 16582687738 then
