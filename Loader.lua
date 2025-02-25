@@ -10,4 +10,8 @@ elseif game.GameId == 4069560710 then
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b436b65706cb68da9f012723fbfce36.lua"))()
 elseif game.GameId == 6325068386 then
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/394954afd12f05778862d5606230aac3.lua"))()
+elseif game.GameId == 3808223175 then
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/0e05752254f38cf9fcd5e0ce14dd7f37.lua"))()
+else
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/a44eb915034273544643d8a2ca439d20.lua"))()
 end
