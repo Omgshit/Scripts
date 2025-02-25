@@ -12,6 +12,18 @@ elseif game.GameId == 6325068386 then
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/394954afd12f05778862d5606230aac3.lua"))()
 elseif game.GameId == 3808223175 then
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/0e05752254f38cf9fcd5e0ce14dd7f37.lua"))()
+elseif game.GameId == 1451439645 then
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/c17b33a8094797417ec248ecf8c4675e.lua"))()
+elseif game.GameId == 4280744785 then
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/472fa9dc3a7d53ef9fa9ddd99d83ae18.lua"))()
+elseif game.GameId == 3756501373 then
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3fc5c3ea50070462f8a63e33a79f790c.lua"))()
+elseif game.GameId == 6931042565 then
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/4bc8b6004f2a85005135a1ef748c1f14.lua"))()
+elseif game.GameId == 5421640482 then
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/ceb6007b13d50a7e6fe747bc11a77abf.lua"))()
+elseif game.GameId == 2655311011 then
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3c9c63b48d682de43fef1d62ad7f8b78.lua"))()
 else
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/a44eb915034273544643d8a2ca439d20.lua"))()
 end
