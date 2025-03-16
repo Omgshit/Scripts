@@ -1162,7 +1162,7 @@ end
 local ScreenGui1 = Instance.new("ScreenGui")
 local ImageButton1 = Instance.new("ImageButton")
 local UICorner = Instance.new("UICorner")
-ScreenGui1.Name = "ImageButton"
+ScreenGui1.Name = "ELGATO HUB ON/OFF"
 ScreenGui1.Parent = game.CoreGui
 ScreenGui1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ImageButton1.Parent = ScreenGui1
