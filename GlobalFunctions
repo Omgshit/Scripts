@@ -2,7 +2,6 @@ local GetGlobal = getgenv and getgenv()
 if not game.Loaded then
     game.Loaded:Wait()
 end
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/refs/heads/main/Pika.lua"))()
 for i,v in next, game.GetChildren(game) do
     GetGlobal[v.ClassName] = v
 end
