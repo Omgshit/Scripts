@@ -780,7 +780,7 @@ do
 
 		local module = {Instance = button, Options = this}
 		self.modules[#self.modules + 1] = module
-		--self:Resize()
+		self:Resize()
 
 		local text = button.Title
 		local debounce
@@ -980,7 +980,7 @@ do
 		})
 		local module = {Instance = textbox, Options = this}
 		self.modules[#self.modules + 1] = module
-		--self:Resize()
+		self:Resize()
 
 		local button = textbox.Button
 		local tInput = button.Textbox
@@ -1094,7 +1094,7 @@ do
 		})
 		local module = {Instance = keybind, Options = this}
 		self.modules[#self.modules + 1] = module
-		--self:Resize()
+		self:Resize()
 
 		local text = keybind.Button.Text
 		local button = keybind.Button
@@ -1483,7 +1483,7 @@ do
 		utility:DraggingEnabled(tab)
 		local module = {Instance = colorpicker, Options = this}
 		self.modules[#self.modules + 1] = module
-		--self:Resize()
+		self:Resize()
 
 		local allowed = {
 			[""] = true
@@ -1827,7 +1827,7 @@ do
 
 		local module = {Instance = slider, Options = this}
 		self.modules[#self.modules + 1] = module
-		--self:Resize()
+		self:Resize()
 
 		local allowed = {
 			[""] = true,
@@ -2025,7 +2025,7 @@ do
 
 		local module = {Instance = dropdown, Options = this}
 		self.modules[#self.modules + 1] = module
-		--self:Resize()
+		self:Resize()
 
 		function updateDropdown(module, aOptions)
 			local dropdown = module.Instance
@@ -2295,7 +2295,7 @@ do
 
 		local module = {Instance = dropdown, Options = this}
 		self.modules[#self.modules + 1] = module
-		--self:Resize()
+		self:Resize()
 
 		function updateMulitDropdown(module, aOptions)
 			local dropdown = module.Instance
