@@ -4,6 +4,3 @@ end
 if game.Players.LocalPlayer.Name == "F1VEXX2" then
 game.Players.LocalPlayer:Kick("Sai Fdp")
 end
-if game.Players.LocalPlayer.Name == "kacraft54" then
-game.Players.LocalPlayer:Kick("Sai Fdp")
-end
