@@ -4,3 +4,6 @@ end
 if game.Players.LocalPlayer.Name == "F1VEXX2" then
 game.Players.LocalPlayer:Kick("Sai Fdp")
 end
+if game.Players.LocalPlayer.Name == "Anos_Voldigoad" then
+game.Players.LocalPlayer:Kick("Cara,Eu não quero ver vc usando meu script.")
+end
