@@ -9,7 +9,6 @@ local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
 
 function Translate(text)
-   if _G.Language then
     local encoded = HttpService:UrlEncode(text)
     local url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=" ..
         _G.Language .. "&dt=t&q=" .. encoded
@@ -27,7 +26,6 @@ function Translate(text)
         return text
     end
     return data[1][1][1]
- end
 end
 
 local redzlib = {
