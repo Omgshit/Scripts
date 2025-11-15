@@ -8,6 +8,10 @@ local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
 
+if not _G.Translate then
+_G.Langauge = "pt"
+end
+
 function Translate(text)
     local encoded = HttpService:UrlEncode(text)
     local url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=" ..
