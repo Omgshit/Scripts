@@ -9,7 +9,7 @@ local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
 
 if not _G.Translate then
-_G.Langauge = "pt"
+_G.Language = "pt"
 end
 
 function Translate(text)
