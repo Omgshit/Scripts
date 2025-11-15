@@ -1,119 +1,96 @@
-local MarketplaceService = game:GetService("MarketplaceService")
-local UserInputService = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
-local HttpService = game:GetService("HttpService")
-local RunService = game:GetService("RunService")
-local CoreGui = game:GetService("CoreGui")
-local Players = game:GetService("Players")
-local Player = Players.LocalPlayer
-local PlayerMouse = Player:GetMouse()
+local MarketplaceService: MarketplaceService = game:GetService("MarketplaceService")
+local UserInputService: UserInputService = game:GetService("UserInputService")
+local TweenService: TweenService = game:GetService("TweenService")
+local HttpService: HttpService = game:GetService("HttpService")
+local RunService: RunService = game:GetService("RunService")
+local Players: Players = game:GetService("Players")
 
-if not _G.Translate then
-_G.Language = "pt"
+local Player: Player = Players.LocalPlayer
+local PlayerMouse: Mouse = Player:GetMouse()
+
+local CoreGui: ScreenGui | CoreGui = (gethui and gethui()) or game:GetService("CoreGui")
+
+local LocalizationService: LocalizationService = game:GetService("LocalizationService")
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SomeoneScripts/Main/refs/heads/main/Translation%20System/Translate.txt"))()
+
+function GetLocalLanguage(): string?
+        local success, country = pcall(function()
+            return LocalizationService:GetCountryRegionForPlayerAsync(Player)
+        end)
+        if success and country and Translations[country] then
+            return country
+        end
+    return nil
 end
 
-function Translate(text)
-    local encoded = HttpService:UrlEncode(text)
-    local url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=" ..
-        _G.Language .. "&dt=t&q=" .. encoded
-    local response = http.request({
-        Url = url,
-        Method = "GET"
-    })
-    if not response or response.StatusCode ~= 200 then
-        return text
-    end
-    local ok, data = pcall(function()
-        return HttpService:JSONDecode(response.Body)
-    end)
-    if not ok then
-        return text
-    end
-    return data[1][1][1]
+local lang: string? = GetLocalLanguage()
+
+function Translate(Phrase)
+    local GameId = tostring(game.GameId)
+    local LangTable = Translations[lang] and Translations[lang][GameId]
+    if not LangTable then return Phrase end
+    return LangTable[Phrase] or Phrase
 end
 
 local redzlib = {
 	Themes = {
-		["Dark +"] = {
-			["Color Hub 1"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromRGB(25, 25, 25)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(25, 25, 25))}),
+		Darker = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(25, 25, 25)),
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(25, 25, 25))
+			}),
 			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
 			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
-			["Color Theme"] = Color3.fromRGB(65, 150, 255),
+			["Color Theme"] = Color3.fromRGB(88, 101, 242),
 			["Color Text"] = Color3.fromRGB(243, 243, 243),
 			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
 		},
 		Dark = {
-			["Color Hub 1"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 40, 40)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(47.5, 47.5, 47.5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(40, 40, 40))}),
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 40, 40)),
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(47.5, 47.5, 47.5)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(40, 40, 40))
+			}),
 			["Color Hub 2"] = Color3.fromRGB(45, 45, 45),
 			["Color Stroke"] = Color3.fromRGB(65, 65, 65),
-			["Color Theme"] = Color3.fromRGB(65, 150, 255),
+			["Color Theme"] = Color3.fromRGB(150, 150, 150),
 			["Color Text"] = Color3.fromRGB(245, 245, 245),
 			["Color Dark Text"] = Color3.fromRGB(190, 190, 190)
 		},
-		Clear = {
-			["Color Hub 1"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromRGB(230.5, 220, 210)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(230.5, 220, 210))}),
-			["Color Hub 2"] = Color3.fromRGB(230, 230, 230),
-			["Color Stroke"] = Color3.fromRGB(140, 140, 140),
-			["Color Theme"] = Color3.fromRGB(150, 150, 150),
-			["Color Text"] = Color3.fromRGB(24, 24, 24),
-			["Color Dark Text"] = Color3.fromRGB(50, 50, 50)
-		},
 		Purple = {
-			["Color Hub 1"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(27.5, 25, 30))}),
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)),
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(27.5, 25, 30))
+			}),
 			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
 			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
 			["Color Theme"] = Color3.fromRGB(150, 0, 255),
 			["Color Text"] = Color3.fromRGB(240, 240, 240),
 			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
 		},
-		Red = {
-			["Color Hub 1"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(27.5, 25, 30))}),
-			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
-			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
-			["Color Theme"] = Color3.fromRGB(255, 15, 15),
-			["Color Text"] = Color3.fromRGB(240, 240, 240),
-			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
+		Orange = {
+		    ["Color Hub 1"] = ColorSequence.new({
+		        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)),
+		        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)),
+		        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(27.5, 25, 30))
+		    }),
+		    ["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
+		    ["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+		    ["Color Theme"] = Color3.fromRGB(255, 165, 0),
+		    ["Color Text"] = Color3.fromRGB(240, 240, 240),
+		    ["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
 		},
-		Yellow = {
-			["Color Hub 1"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(27.5, 25, 30))}),
-			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
-			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
-			["Color Theme"] = Color3.fromRGB(255, 255, 15),
-			["Color Text"] = Color3.fromRGB(240, 240, 240),
-			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
-		},
-		Green = {
-			["Color Hub 1"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(27.5, 25, 30))}),
-			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
-			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
-			["Color Theme"] = Color3.fromRGB(15, 255, 55),
-			["Color Text"] = Color3.fromRGB(240, 240, 240),
-			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
-		},
-		Pink = {
-			["Color Hub 1"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(27.5, 25, 30))}),
-			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
-			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
-			["Color Theme"] = Color3.fromRGB(250, 160, 160),
-			["Color Text"] = Color3.fromRGB(240, 240, 240),
-			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
-		},
-		Blue = {
-			["Color Hub 1"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(27.5, 25, 30))}),
-			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
-			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
-			["Color Theme"] = Color3.fromRGB(10, 225, 250),
-			["Color Text"] = Color3.fromRGB(240, 240, 240),
-			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
-		}
 	},
 	Info = {
 		Version = "1.1.0"
 	},
 	Save = {
-		UISize = {460, 340},
+		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "Purple"
+		Theme = "Dark"
 	},
 	Settings = {},
 	Connection = {},
@@ -947,11 +924,11 @@ local redzlib = {
 	end)()
 }
 
-local ViewportSize = workspace.CurrentCamera.ViewportSize
-local UIScale = ViewportSize.Y / 450
+local ViewportSize: Vector2 = workspace.CurrentCamera.ViewportSize
+local UIScale: number = ViewportSize.Y / 450
 
-local Settings = redzlib.Settings
-local Flags = redzlib.Flags
+local Settings: table = redzlib.Settings
+local Flags: table = redzlib.Flags
 
 local SetProps, SetChildren, InsertTheme, Create do
 	InsertTheme = function(Instance, Type)
@@ -999,14 +976,23 @@ local SetProps, SetChildren, InsertTheme, Create do
 		return new
 	end
 	
+	local function GetFullPath(file)
+		return "Someone Hub/Libraries/Redz Library/" .. file
+	end
+	
 	local function Save(file)
-		if readfile and isfile and isfile(file) then
-			local decode = HttpService:JSONDecode(readfile(file))
-			
+		local fullPath: string = GetFullPath(file)
+		if readfile and isfile and isfile(fullPath) then
+			local decode: table? = HttpService:JSONDecode(readfile(fullPath):gsub("^%-%-%[%[.-%]%]%%-%-%s*\n?", ""))
+	
 			if type(decode) == "table" then
 				if rawget(decode, "UISize") then redzlib.Save["UISize"] = decode["UISize"] end
 				if rawget(decode, "TabSize") then redzlib.Save["TabSize"] = decode["TabSize"] end
 				if rawget(decode, "Theme") and VerifyTheme(decode["Theme"]) then redzlib.Save["Theme"] = decode["Theme"] end
+			end
+	
+			if writefile then
+				writefile(fullPath, "--[[Modificado Por Someone E Equipe]]--\n" .. HttpService:JSONEncode(redzlib.Save))
 			end
 		end
 	end
@@ -1043,7 +1029,7 @@ local Funcs = {} do
 	end
 	
 	function Funcs:GetConnectionFunctions(ConnectedFuncs, func)
-		local Connected = { Function = func, Connected = true }
+		local Connected: table = { Function = func, Connected = true }
 		
 		function Connected:Disconnect()
 			if self.Connected then
@@ -1137,8 +1123,6 @@ local GetFlag, SetFlag, CheckFlag do
 			db=true;task.wait(0.1);db=false
 			
 			local Success, Encoded = pcall(function()
-				-- local _Flags = {}
-				-- for _,Flag in pairs(Flags) do _Flags[_] = Flag.Value end
 				return HttpService:JSONEncode(Flags)
 			end)
 			
@@ -1153,7 +1137,7 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "redz Library V5",
+	Name = "redz library v5",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
@@ -1181,30 +1165,6 @@ local function ConnectSave(Instance, func)
 		end
 		func()
 	end)
-end
-
-local ScreenGui1 = Instance.new("ScreenGui")
-local ImageButton1 = Instance.new("ImageButton")
-local UICorner = Instance.new("UICorner")
-ScreenGui1.Name = "ELGATO HUB ON/OFF"
-ScreenGui1.Parent = game.CoreGui
-ScreenGui1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ImageButton1.Parent = ScreenGui1
-ImageButton1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton1.BorderSizePixel = 0
-ImageButton1.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
-ImageButton1.Size = UDim2.new(0, 50, 0, 50)
-ImageButton1.Draggable = true
-ImageButton1.Image = "rbxassetid://89563346209452"
-local CoreGui = game:GetService("CoreGui")
-ImageButton1.MouseButton1Down:connect(function()
-CoreGui["redz Library V5"].Enabled = not CoreGui["redz Library V5"].Enabled
-end)
-
-UICorner.Parent = ImageButton1
-do local GUI = game.CoreGui:FindFirstChild("SOMEXHUB");if GUI then GUI:Destroy();end;if _G.Color == nil then
-    _G.Color = Color3.fromRGB(230, 5, 12)
-   end 
 end
 
 local function CreateTween(Configs)
@@ -1235,7 +1195,6 @@ local function MakeDrag(Instance)
 		local function Update(Input)
 			local delta = Input.Position - DragStart
 			local Position = UDim2.new(StartPos.X.Scale, StartPos.X.Offset + delta.X / UIScale, StartPos.Y.Scale, StartPos.Y.Offset + delta.Y / UIScale)
-			-- Instance.Position = Position
 			CreateTween({Instance, "Position", Position, 0.35})
 		end
 		
@@ -1334,7 +1293,7 @@ end)
 
 local function ButtonFrame(Instance, Title, Description, HolderSize)
 	local TitleL = InsertTheme(Create("TextLabel", {
-		Font = Enum.Font.GothamMedium,
+		Font = "FredokaOne", --Enum.Font.GothamMedium,
 		TextColor3 = Theme["Color Text"],
 		Size = UDim2.new(1, -20),
 		AutomaticSize = "Y",
@@ -1349,7 +1308,7 @@ local function ButtonFrame(Instance, Title, Description, HolderSize)
 	}), "Text")
 	
 	local DescL = InsertTheme(Create("TextLabel", {
-		Font = Enum.Font.Gotham,
+		Font = "FredokaOne", --Enum.Font.Gotham,
 		TextColor3 = Theme["Color Dark Text"],
 		Size = UDim2.new(1, -20),
 		AutomaticSize = "Y",
@@ -1485,8 +1444,8 @@ function redzlib:SetScale(NewScale)
 end
 
 function redzlib:MakeWindow(Configs)
-	local WTitle = Translate(Configs[1]) or Translate(Configs.Name) or Translate(Configs.Title) or "redz Library V5"
-	local WMiniText = Translate(Configs[2]) or Translate(Configs.SubTitle) or Translate("By Omg")
+	local WTitle = Configs[1] or Configs.Name or Configs.Title or "redz Library V5"
+	local WMiniText = Configs[2] or Configs.SubTitle or "by : redz9999"
 	
 	Settings.ScriptFile = Configs[3] or Configs.SaveFolder or false
 	
@@ -1537,12 +1496,12 @@ function redzlib:MakeWindow(Configs)
 		Position = UDim2.new(0, 15, 0.5),
 		AnchorPoint = Vector2.new(0, 0.5),
 		AutomaticSize = "XY",
-		Text = WTitle,
+		Text = Translate(WTitle),
 		TextXAlignment = "Left",
 		TextSize = 12,
 		TextColor3 = Theme["Color Text"],
 		BackgroundTransparency = 1,
-		Font = Enum.Font.GothamMedium,
+		Font = "FredokaOne", --Enum.Font.GothamMedium,
 		Name = "Title"
 	}, {
 		InsertTheme(Create("TextLabel", {
@@ -1550,13 +1509,13 @@ function redzlib:MakeWindow(Configs)
 			AutomaticSize = "X",
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.new(1, 5, 0.9),
-			Text = WMiniText,
+			Text = Translate(WMiniText),
 			TextColor3 = Theme["Color Dark Text"],
 			BackgroundTransparency = 1,
 			TextXAlignment = "Left",
 			TextYAlignment = "Bottom",
 			TextSize = 8,
-			Font = Enum.Font.Gotham,
+			Font = "FredokaOne", --Enum.Font.Gotham,
 			Name = "SubTitle"
 		}), "DarkText")
 	}), "Text")
@@ -1646,7 +1605,7 @@ function redzlib:MakeWindow(Configs)
 		BackgroundTransparency = 1,
 		Image = "rbxassetid://10747384394",
 		AutoButtonColor = false,
-		Name = "Close"
+		Name = "Close Burro"
 	})
 	
 	local MinimizeButton = SetProps(CloseButton:Clone(), {
@@ -1664,8 +1623,8 @@ function redzlib:MakeWindow(Configs)
 	local Window, FirstTab = {}, false
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
-			Title = "Close",
-			Text = "You Want Close Ui?",
+			Title = "Close?",
+			Text = "You Won't Be Able To Open It Again",
 			Options = {
 				{"Confirm", function()
 					ScreenGui:Destroy()
@@ -1700,7 +1659,7 @@ function redzlib:MakeWindow(Configs)
 	end
 	function Window:AddMinimizeButton(Configs)
 		local Button = MakeDrag(Create("ImageButton", ScreenGui, {
-			Size = UDim2.fromOffset(35, 35),
+			Size = UDim2.fromOffset(45, 45),
 			Position = UDim2.fromScale(0.15, 0.15),
 			BackgroundTransparency = 1,
 			BackgroundColor3 = Theme["Color Hub 2"],
@@ -1751,7 +1710,7 @@ function redzlib:MakeWindow(Configs)
 			AnchorPoint = Vector2.new(0.5, 0.5)
 		}, {
 			InsertTheme(Create("TextLabel", {
-				Font = Enum.Font.GothamBold,
+				Font = "FredokaOne", --Enum.Font.GothamBold,
 				Size = UDim2.new(1, 0, 0, 20),
 				Text = DTitle,
 				TextXAlignment = "Left",
@@ -1761,7 +1720,7 @@ function redzlib:MakeWindow(Configs)
 				BackgroundTransparency = 1
 			}), "Text"),
 			InsertTheme(Create("TextLabel", {
-				Font = Enum.Font.GothamMedium,
+				Font = "FredokaOne", --Enum.Font.GothamMedium,
 				Size = UDim2.new(1, -25),
 				AutomaticSize = "Y",
 				Text = DText,
@@ -1814,7 +1773,7 @@ function redzlib:MakeWindow(Configs)
 			Make("Corner", Button)
 			SetProps(Button, {
 				Text = Name,
-				Font = Enum.Font.GothamBold,
+				Font = "FredokaOne", --Enum.Font.GothamBold,
 				TextColor3 = Theme["Color Text"],
 				TextSize = 12
 			})
@@ -1853,7 +1812,7 @@ function redzlib:MakeWindow(Configs)
 	local ContainerList = {}
 	function Window:MakeTab(paste, Configs)
 		if type(paste) == "table" then Configs = paste end
-		local TName = Translate(Configs[1]) or Translate(Configs.Title) or "Tab!"
+		local TName = Configs[1] or Configs.Title or "Tab!"
 		local TIcon = Configs[2] or Configs.Icon or ""
 		
 		TIcon = redzlib:GetIcon(TIcon)
@@ -1869,8 +1828,8 @@ function redzlib:MakeWindow(Configs)
 			Size = UDim2.new(1, TIcon and -25 or -15, 1),
 			Position = UDim2.fromOffset(TIcon and 25 or 15),
 			BackgroundTransparency = 1,
-			Font = Enum.Font.GothamMedium,
-			Text = TName,
+			Font = "FredokaOne", --Enum.Font.GothamMedium,
+			Text = Translate(TName),
 			TextColor3 = Theme["Color Text"],
 			TextSize = 10,
 			TextXAlignment = Enum.TextXAlignment.Left,
@@ -1923,6 +1882,8 @@ function redzlib:MakeWindow(Configs)
 		
 		if not FirstTab then Container.Parent = Containers end
 		
+		local Tab = { Enabled = (FirstTab == false) }
+		
 		local function Tabs()
 			if Container.Parent then return end
 			for _,Frame in pairs(ContainerList) do
@@ -1937,6 +1898,7 @@ function redzlib:MakeWindow(Configs)
 					Tab.func:Disable()
 				end
 			end)
+			Tab.Enabled = true
 			CreateTween({Container, "Size", UDim2.new(1, 0, 1, 0), 0.3})
 			CreateTween({LabelTitle, "TextTransparency", 0, 0.35})
 			CreateTween({LabelIcon, "ImageTransparency", 0, 0.35})
@@ -1946,11 +1908,11 @@ function redzlib:MakeWindow(Configs)
 		TabSelect.Activated:Connect(Tabs)
 		
 		FirstTab = true
-		local Tab = {}
 		table.insert(redzlib.Tabs, {TabInfo = {Name = TName, Icon = TIcon}, func = Tab, Cont = Container})
 		Tab.Cont = Container
 		
 		function Tab:Disable()
+		  self.Enabled = false
 			Container.Parent = nil
 			CreateTween({LabelTitle, "TextTransparency", 0.3, 0.35})
 			CreateTween({LabelIcon, "ImageTransparency", 0.3, 0.35})
@@ -1968,15 +1930,13 @@ function redzlib:MakeWindow(Configs)
 		
 		function Tab:AddSection(Configs)
 			local SectionName = type(Configs) == "string" and Configs or Configs[1] or Configs.Name or Configs.Title or Configs.Section
-			
 			local SectionFrame = Create("Frame", Container, {
 				Size = UDim2.new(1, 0, 0, 20),
 				BackgroundTransparency = 1,
 				Name = "Option"
 			})
-			
 			local SectionLabel = InsertTheme(Create("TextLabel", SectionFrame, {
-				Font = Enum.Font.GothamBold,
+				Font = "FredokaOne", --Enum.Font.FredokaOne,
 				Text = Translate(SectionName),
 				TextColor3 = Theme["Color Text"],
 				Size = UDim2.new(1, -25, 1, 0),
@@ -1986,7 +1946,6 @@ function redzlib:MakeWindow(Configs)
 				TextSize = 14,
 				TextXAlignment = "Left"
 			}), "Text")
-			
 			local Section = {}
 			table.insert(redzlib.Options, {type = "Section", Name = SectionName, func = Section})
 			function Section:Visible(Bool)
@@ -1998,42 +1957,36 @@ function redzlib:MakeWindow(Configs)
 			end
 			function Section:Set(New)
 				if New then
-					SectionLabel.Text = GetStr(New)
+					SectionLabel.Text = GetStr(Translate(New))
 				end
 			end
 			return Section
 		end
+		
 		function Tab:AddParagraph(Configs)
 			local PName = Configs[1] or Configs.Title or "Paragraph"
-			local PDesc = Configs[2] or Configs.Text or ""
+			local PDesc = Configs[2] or Configs.Description or Configs.Text or ""
 			
-			local Frame, LabelFunc = ButtonFrame(Container, PName, PDesc, UDim2.new(1, -20))
+			local Frame, LabelFunc = ButtonFrame(Container, Translate(PName), Translate(PDesc), UDim2.new(1, -20))
 			
 			local Paragraph = {}
 			function Paragraph:Visible(...) Funcs:ToggleVisible(Frame, ...) end
 			function Paragraph:Destroy() Frame:Destroy() end
 			function Paragraph:SetTitle(Val)
-				LabelFunc:SetTitle(GetStr(Val))
+				LabelFunc:SetTitle(GetStr(Translate(Val)))
 			end
 			function Paragraph:SetDesc(Val)
-				LabelFunc:SetDesc(GetStr(Val))
-			end
-			function Paragraph:Set(Val1, Val2)
-				if Val1 and Val2 then
-					LabelFunc:SetTitle(GetStr(Val1))
-					LabelFunc:SetDesc(GetStr(Val2))
-				elseif Val1 then
-					LabelFunc:SetDesc(GetStr(Val1))
-				end
+				LabelFunc:SetDesc(GetStr(Translate(Val)))
 			end
 			return Paragraph
 		end
+		
 		function Tab:AddButton(Configs)
 			local BName = Configs[1] or Configs.Name or Configs.Title or "Button!"
 			local BDescription = Configs.Desc or Configs.Description or ""
 			local Callback = Funcs:GetCallback(Configs, 2)
 			
-			local FButton, LabelFunc = ButtonFrame(Container, Translate(BName), Translate(BDescription), UDim2.new(1, -20))
+			local FButton, LabelFunc = ButtonFrame(Container, BName, BDescription, UDim2.new(1, -20))
 			
 			local ButtonIcon = Create("ImageLabel", FButton, {
 				Size = UDim2.new(0, 14, 0, 14),
@@ -2063,6 +2016,7 @@ function redzlib:MakeWindow(Configs)
 			end
 			return Button
 		end
+		
 		function Tab:AddToggle(Configs)
 			local TName = Configs[1] or Configs.Name or Configs.Title or "Toggle"
 			local TDesc = Configs.Desc or Configs.Description or ""
@@ -2141,10 +2095,10 @@ function redzlib:MakeWindow(Configs)
 		function Tab:AddDropdown(Configs)
 			local DName = Configs[1] or Configs.Name or Configs.Title or "Dropdown"
 			local DDesc = Configs.Desc or Configs.Description or ""
-			local DOptions = Configs[2] or Configs.Options or {}
+			local DOptions = Configs[2] or Configs.Options or Configs.Values or {}
 			local OpDefault = Configs[3] or Configs.Default or {}
 			local Flag = Configs[5] or Configs.Flag or false
-			local DMultiSelect = Configs.MultiSelect or false
+			local DMultiSelect = Configs.MultiSelect or Configs.Multi or false
 			local Callback = Funcs:GetCallback(Configs, 4)
 			
 			local Button, LabelFunc = ButtonFrame(Container, Translate(DName), Translate(DDesc), UDim2.new(1, -180))
@@ -2161,7 +2115,7 @@ function redzlib:MakeWindow(Configs)
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				BackgroundTransparency = 1,
-				Font = Enum.Font.GothamBold,
+				Font = "FredokaOne", --Enum.Font.GothamBold,
 				TextScaled = true,
 				TextColor3 = Theme["Color Text"],
 				Text = "..."
@@ -2289,7 +2243,7 @@ function redzlib:MakeWindow(Configs)
 				end
 				
 				local function CallbackSelected()
-					SetFlag(Flag, MultiSelect and Selected or tostring(Selected))
+					SetFlag(Flag, if MultiSelect then Selected else tostring(Selected or "..."))
 					Funcs:FireCallback(Callback, Selected)
 				end
 				
@@ -2303,7 +2257,7 @@ function redzlib:MakeWindow(Configs)
 						end
 						ActiveLabel.Text = #list > 0 and table.concat(list, ", ") or "..."
 					else
-						ActiveLabel.Text = tostring(Selected or "...")
+						ActiveLabel.Text = tostring(Translate(Selected) or "...")
 					end
 				end
 				
@@ -2379,9 +2333,9 @@ function redzlib:MakeWindow(Configs)
 					local OptioneName = InsertTheme(Create("TextLabel", Button, {
 						Size = UDim2.new(1, 0, 1),
 						Position = UDim2.new(0, 10),
-						Text = Name,
+						Text = Translate(Name),
 						TextColor3 = Theme["Color Text"],
-						Font = Enum.Font.GothamBold,
+						Font = "FredokaOne", --Enum.Font.GothamBold,
 						TextXAlignment = "Left",
 						BackgroundTransparency = 1,
 						TextTransparency = 0.4
@@ -2490,11 +2444,11 @@ function redzlib:MakeWindow(Configs)
 			local Increase = Configs[4] or Configs.Increase or 1
 			local Callback = Funcs:GetCallback(Configs, 6)
 			local Flag = Configs[7] or Configs.Flag or false
-			local Default = Configs[5] or Configs.Default or 25
+			local Default = Configs[5] or (typeof(Configs.Default) ~= nil and Configs.Default) or 25
 			if CheckFlag(Flag) then Default = GetFlag(Flag) end
 			Min, Max = Min / Increase, Max / Increase
 			
-			local Button, LabelFunc = ButtonFrame(Container, SName, SDesc, UDim2.new(1, -180))
+			local Button, LabelFunc = ButtonFrame(Container, Translate(SName), Translate(SDesc), UDim2.new(1, -180))
 			
 			local SliderHolder = Create("TextButton", Button, {
 				Size = UDim2.new(0.45, 0, 1),
@@ -2532,7 +2486,7 @@ function redzlib:MakeWindow(Configs)
 				Position = UDim2.new(0, 0, 0.5),
 				BackgroundTransparency = 1,
 				TextColor3 = Theme["Color Text"],
-				Font = Enum.Font.FredokaOne,
+				Font = "FredokaOne", --Enum.Font.FredokaOne,
 				TextSize = 12
 			}), "Text")
 			
@@ -2624,9 +2578,9 @@ function redzlib:MakeWindow(Configs)
 			local TClearText = Configs[3] or Configs.ClearText or false
 			local Callback = Funcs:GetCallback(Configs, 4)
 			
-			if type(TDefault) ~= "string" or TDefault:gsub(" ", ""):len() < 1 then
-				TDefault = false
-			end
+			--if type(TDefault) ~= "string" or TDefault:gsub(" ", ""):len() < 1 then
+				--TDefault = false
+			--end
 			
 			local Button, LabelFunc = ButtonFrame(Container, Translate(TName), Translate(TDesc), UDim2.new(1, -38))
 			
@@ -2642,12 +2596,13 @@ function redzlib:MakeWindow(Configs)
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				BackgroundTransparency = 1,
-				Font = Enum.Font.GothamBold,
+				Font = "FredokaOne", --Enum.Font.GothamBold,
 				TextScaled = true,
 				TextColor3 = Theme["Color Text"],
 				ClearTextOnFocus = TClearText,
 				PlaceholderText = Translate(TPlaceholderText),
-				Text = ""
+				Text = TDefault,
+				RichText = true,
 			}), "Text")
 			
 			local Pencil = Create("ImageLabel", SelectedFrame, {
@@ -2694,17 +2649,6 @@ function redzlib:MakeWindow(Configs)
 				BackgroundTransparency = 1
 			})
 			
-			local InviteLabel = Create("TextLabel", InviteHolder, {
-				Size = UDim2.new(1, 0, 0, 15),
-				Position = UDim2.new(0, 5),
-				TextColor3 = Color3.fromRGB(40, 150, 255),
-				Font = Enum.Font.GothamBold,
-				TextXAlignment = "Left",
-				BackgroundTransparency = 1,
-				TextSize = 10,
-				Text = Invite
-			})
-			
 			local FrameHolder = InsertTheme(Create("Frame", InviteHolder, {
 				Size = UDim2.new(1, 0, 0, 65),
 				AnchorPoint = Vector2.new(0, 1),
@@ -2722,7 +2666,7 @@ function redzlib:MakeWindow(Configs)
 			local LTitle = InsertTheme(Create("TextLabel", FrameHolder, {
 				Size = UDim2.new(1, -52, 0, 15),
 				Position = UDim2.new(0, 44, 0, 7),
-				Font = Enum.Font.GothamBold,
+				Font = "FredokaOne", --Enum.Font.GothamBold,
 				TextColor3 = Theme["Color Text"],
 				TextXAlignment = "Left",
 				BackgroundTransparency = 1,
@@ -2735,7 +2679,7 @@ function redzlib:MakeWindow(Configs)
 				Position = UDim2.new(0, 44, 0, 22),
 				TextWrapped = "Y",
 				AutomaticSize = "Y",
-				Font = Enum.Font.Gotham,
+				Font = "FredokaOne", --Enum.Font.Gotham,
 				TextColor3 = Theme["Color Dark Text"],
 				TextXAlignment = "Left",
 				BackgroundTransparency = 1,
@@ -2747,8 +2691,8 @@ function redzlib:MakeWindow(Configs)
 				Size = UDim2.new(1, -14, 0, 16),
 				AnchorPoint = Vector2.new(0.5, 1),
 				Position = UDim2.new(0.5, 0, 1, -7),
-				Text = "Join",
-				Font = Enum.Font.GothamBold,
+				Text = Translate("Copy Invitation"),
+				Font = "FredokaOne", --Enum.Font.GothamBold,
 				TextSize = 12,
 				TextColor3 = Color3.fromRGB(220, 220, 220),
 				BackgroundColor3 = Color3.fromRGB(50, 150, 50)
@@ -2761,12 +2705,12 @@ function redzlib:MakeWindow(Configs)
 				
 				ClickDelay = true
 				SetProps(JoinButton, {
-					Text = "Copied to Clipboard",
+					Text = Translate("Copied To Clipboard"),
 					BackgroundColor3 = Color3.fromRGB(100, 100, 100),
 					TextColor3 = Color3.fromRGB(150, 150, 150)
 				})task.wait(5)
 				SetProps(JoinButton, {
-					Text = "Join",
+					Text = Translate("Copy Invitation"),
 					BackgroundColor3 = Color3.fromRGB(50, 150, 50),
 					TextColor3 = Color3.fromRGB(220, 220, 220)
 				})ClickDelay = false
