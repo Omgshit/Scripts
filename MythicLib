@@ -7,7 +7,6 @@ local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
-local LocalizationService = game:GetService("LocalizationService")
 
 function Translate(text)
    if _G.Language then
