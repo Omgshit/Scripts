@@ -17,7 +17,7 @@ Module.RunFunctions = {} do
 		_ENV.loadedFarm = false
 		_ENV.OnFarm = false
 		
-		local text = (`redz-Hub error [ { Settings.RunningOption or "Null" } ] { ErrorMessage }`)
+		local text = (`OMG-Hub error [ { Settings.RunningOption or "Null" } ] { ErrorMessage }`)
 		
 		if _ENV.rz_error_message then
 			_ENV.rz_error_message.Text ..= `\n\n{ text }`
