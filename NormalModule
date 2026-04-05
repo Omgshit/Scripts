@@ -11,7 +11,6 @@ local Players: Players = game:GetService("Players");
 local Player = Players.LocalPlayer;
 
 local Module = {};
-local MobsFolders = {};
 
 Module.RunFunctions = {} do
 	local function ShowErrorMessage(ErrorMessage)
