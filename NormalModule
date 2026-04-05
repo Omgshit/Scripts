@@ -188,7 +188,7 @@ Module.TweenBodyVelocity = (function()
 			if _ENV.OnFarm then
 				for i = 1, #BaseParts do
 					local BasePart = BaseParts[i]
-					local CanTouchValue = if (tick() - Module.RemoveCanTouch) <= 1 then false else true
+					local CanTouchValue = if (tick() - 0) <= 1 then false else true
 					
 					if CanTouchObjects[BasePart] and BasePart.CanTouch ~= CanTouchValue then
 						BasePart.CanTouch = CanTouchValue
