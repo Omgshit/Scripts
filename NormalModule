@@ -226,7 +226,7 @@ Module.TweenBodyVelocity = (function()
 				end
 			end
 			
-			if BodyVelocity.Velocity ~= Vector3.zero and (not Humanoid or not Humanoid.SeatPart or not _ENV.OnFarm) then
+			if BodyVelocity.Velocity ~= Vector3.zero and (not Humanoid or not _ENV.OnFarm) then
 				BodyVelocity.Velocity = Vector3.zero
 			end
 		end
