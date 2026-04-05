@@ -224,10 +224,6 @@ Module.TweenBodyVelocity = (function()
 					BodyVelocity.Parent = nil
 				end
 			end
-			
-			if BodyVelocity.Velocity ~= Vector3.zero and (not Humanoid or not _ENV.OnFarm) then
-				BodyVelocity.Velocity = Vector3.zero
-			end
 		end
 		
 		table.insert(Connections, RunService.Stepped:Connect(function()
