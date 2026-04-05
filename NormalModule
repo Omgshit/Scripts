@@ -137,8 +137,7 @@ Module.TweenBodyVelocity = (function()
 		end
 		
 		_ENV.tween_bodyvelocity = BodyVelocity
-		
-		local IsAlive = Module.IsAlive
+
 		local CanRemoveTag = false
 		
 		local BaseParts, CanCollideObjects, CanTouchObjects = {}, {}, {} do
