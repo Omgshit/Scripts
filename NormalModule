@@ -211,7 +211,7 @@ Module.TweenBodyVelocity = (function()
 		end
 		
 		local function UpdateVelocityOnStepped(Character)
-			local RootPart = Character and Character:FindFirstChild("UpperTorso")
+			local RootPart = Character and Character:FindFirstChild("HumanoidRootPart")
 			local Humanoid = Character and Character:FindFirstChild("Humanoid")
 			local BodyVelocity = _ENV.tween_bodyvelocity
 			
