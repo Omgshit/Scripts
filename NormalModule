@@ -231,7 +231,7 @@ Module.TweenBodyVelocity = (function()
 			end
 		end
 		
-		table.insert(Connections, Stepped:Connect(function()
+		table.insert(Connections, RunService.Stepped:Connect(function()
 			local Character = Player.Character
 			UpdateVelocityOnStepped(Character)
 			NoClipOnStepped(Character)
