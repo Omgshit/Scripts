@@ -172,7 +172,7 @@ Module.TweenBodyVelocity = (function()
 			for i = 1, #CanCollideObjects do
 				CanCollideObjects[i].CanCollide = false
 			end
-		elseif Character.PrimaryPart and not Character.PrimaryPart.CanCollide then
+		elseif Character.HumanoidRootPart and not Character.HumanoidRootPart.CanCollide then
 			for i = 1, #CanCollideObjects do
 				CanCollideObjects[i].CanCollide = true
 			end
