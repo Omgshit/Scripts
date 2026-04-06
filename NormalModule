@@ -196,7 +196,7 @@ Module.TweenBodyVelocity = (function()
 						BasePart.CanCollide = false
 					end
 				end
-			elseif Character.HumanoidRootPart and (not Character.HumanoidRootPart.CanCollide or not Character.HumanoidRootPart.CanTouch) then
+			elseif Character:FindFirstChild("HumanoidRootPart") and (not Character.HumanoidRootPart.CanCollide or not Character.HumanoidRootPart.CanTouch) then
 				for i = 1, #BaseParts do
 					local BasePart = BaseParts[i]
 					
