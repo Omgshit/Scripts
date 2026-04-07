@@ -13,30 +13,25 @@ local Module = {};
 
 Module.RunFunctions = {} do
 	Module.RunFunctions.FarmQueue = function(Options)
-			local function GetQueue()
-				for _, Option in Options do
-					Settings.RunningOption = Option.Name
-					local Method = Option.Function()
+				while task.wait(Settings.SmoothMode and 0.25 or 0) do
+					local Enabled = false
 					
-					if Method then
-						if type(Method) == "string" then
-							Settings.RunningMethod = Method
+					for _, Option in Options do
+						Settings.RunningOption = Option.Name
+						local Method = Option.Function()
+						
+						if Method then
+							Settings.RunningMethod = type(Method) == "string" and Method
+							Enabled = true; break
+						else
+							Settings.RunningOption, Settings.RunningMethod = nil, nil
 						end
-						return Method
 					end
+					
+					_ENV.OnFarm = (_ENV.teleporting or Enabled)
 				end
-				
-				Settings.RunningOption, Settings.RunningMethod = nil, nil
-			end
-			
-			while task.wait(Settings.SmoothMode and 0.25 or 0) do
-				if _ENV.teleporting then
-					_ENV.OnFarm = true
-				else
-					_ENV.OnFarm = if GetQueue() then true else false
-				end
-			end
-	    end
+		end
+	end
 	
 	Module.RunFunctions.TweenCreator = function()
 		local TweenCreator = {}
