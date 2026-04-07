@@ -31,7 +31,6 @@ Module.RunFunctions = {} do
 					_ENV.OnFarm = (_ENV.teleporting or Enabled)
 				end
 		end
-	end
 	
 	Module.RunFunctions.TweenCreator = function()
 		local TweenCreator = {}
