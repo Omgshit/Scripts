@@ -13,7 +13,7 @@ local Module = {};
 
 Module.RunFunctions = {} do
   Module.RunFunctions.FarmQueue = function(Options)
-	while task.wait(Settings.SmoothMode and 0.25 or 0.05) do
+	while task.wait(Settings.SmoothMode and 0.25 or 0) do
 		local Enabled = false
 		
 		for _, Option in pairs(Options) do
