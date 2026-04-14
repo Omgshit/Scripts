@@ -12,29 +12,6 @@ local Player = Players.LocalPlayer;
 local Module = {};
 
 Module.RunFunctions = {} do
-Module.RunFunctions.FarmQueue = function(Options)
-    spawn(function()
-        while task.wait(Settings.SmoothMode and 0.25 or 0) do
-            for _, Option in ipairs(Options) do
-                Settings.RunningOption = Option.Name
-                local Success, Result = pcall(function()
-                    return Option.Function()
-                end)
-                if Success and Result then
-                    if type(Result) == "string" then
-                        Settings.RunningMethod = Result
-                    end
-                    _ENV.OnFarm = true
-                    repeat task.wait()
-                    until not Result or _ENV.teleporting
-                    _ENV.OnFarm = false
-                end
-            end
-          Settings.RunningOption, Settings.RunningMethod = nil, nil
-        end
-    end)
-end
-	
 	Module.RunFunctions.TweenCreator = function()
 		local TweenCreator = {}
 		TweenCreator.__index = TweenCreator
