@@ -14,7 +14,7 @@ local Module = {};
 Module.RunFunctions = {} do
 Module.RunFunctions.FarmQueue = function(Options)
     spawn(function()
-        while true do
+        while task.wait(Settings.SmoothMode and 0.25 or 0) do
             for _, Option in ipairs(Options) do
                 Settings.RunningOption = Option.Name
                 local Success, Result = pcall(function()
