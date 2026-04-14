@@ -29,7 +29,7 @@ Module.RunFunctions = {} do
     spawn(function()
         while task.wait(Settings.SmoothMode and 0.25 or 0) do
             pcall(function()
-                    _ENV.OnFarm = GetQueue() and true or false
+                    _ENV.OnFarm = GetQueue() 
             end)
         end
     end)
