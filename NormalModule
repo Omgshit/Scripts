@@ -13,6 +13,7 @@ local Module = {};
 
 Module.RunFunctions = {} do
    Module.RunFunctions.FarmQueue = function(Options)
+    local function GetQueue()
         for _, Option in Options do
             Settings.RunningOption = Option.Name
             local Method = Option.Function()
@@ -23,6 +24,17 @@ Module.RunFunctions = {} do
                 return Method
             end
         end
+        Settings.RunningOption, Settings.RunningMethod = nil, nil
+    end
+    spawn(function()
+        while task.wait(Settings.SmoothMode and 0.25 or 0) do
+            pcall(function()
+                if _ENV.teleporting then
+                    _ENV.OnFarm = true
+                end
+            end)
+        end
+    end)
 end
 	
 	Module.RunFunctions.TweenCreator = function()
