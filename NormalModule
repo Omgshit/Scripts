@@ -110,7 +110,6 @@ local function BringMobs(BaseMob: Model): (nil)
     pcall(sethiddenproperty, Player, "SimulationRadius", 1250);
     
     for _, Enemy in BaseMob:GetChildren() do
-        if not IsAlive(Enemy) then continue end;
         local RootPart = Enemy:FindFirstChild("HumanoidRootPart");
         
         if RootPart and (BringPosition - RootPart.Position).Magnitude <= Settings.BringDistance then
