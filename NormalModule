@@ -12,29 +12,25 @@ local Player = Players.LocalPlayer;
 local Module = {};
 
 Module.RunFunctions = {} do
-   Module.RunFunctions.FarmQueue = function(Options)
-    local function GetQueue()
-        for _, Option in Options do
-            Settings.RunningOption = Option.Name
-            local Method = Option.Function()
-            if Method then
-                if type(Method) == "string" then
-                    Settings.RunningMethod = Method
-                end
-                return Method
-            end
-        end
-        Settings.RunningOption, Settings.RunningMethod = nil, nil
-    end
+Module.RunFunctions.FarmQueue = function(Options)
     spawn(function()
-        while task.wait(Settings.SmoothMode and 0.25 or 0) do
-            pcall(function()
-                if _ENV.teleporting then
+        while true do
+            for _, Option in ipairs(Options) do
+                Settings.RunningOption = Option.Name
+                local Success, Result = pcall(function()
+                    return Option.Function()
+                end)
+                if Success and Result then
+                    if type(Result) == "string" then
+                        Settings.RunningMethod = Result
+                    end
                     _ENV.OnFarm = true
-                else
-                    _ENV.OnFarm = GetQueue() and true or false
+                    repeat task.wait()
+                    until not Result or _ENV.teleporting
+                    _ENV.OnFarm = false
                 end
-            end)
+            end
+          Settings.RunningOption, Settings.RunningMethod = nil, nil
         end
     end)
 end
