@@ -23,7 +23,6 @@ Module.RunFunctions = {} do
                 return Method
             end
         end
-        Settings.RunningOption, Settings.RunningMethod = nil, nil
 end
 	
 	Module.RunFunctions.TweenCreator = function()
