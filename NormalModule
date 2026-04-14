@@ -103,6 +103,32 @@ local function IsAlive(Character: Model): boolean?
 	end
 end
 
+local function BringMobs(BaseMob: Model): (nil)
+    local OriginalName = BaseMob.Humanoid.DisplayName;
+    local EnemyRootPart = BaseMob.HumanoidRootPart;
+    local BringPosition = EnemyRootPart.Position;
+    
+    pcall(sethiddenproperty, Player, "SimulationRadius", 1250);
+    
+    for _, Enemy in BaseMob.Parent:GetChildren() do
+        if not IsAlive(Enemy) then continue end;
+        if Enemy.Humanoid.DisplayName ~= OriginalName then continue end;
+        local RootPart = Enemy:FindFirstChild("HumanoidRootPart");
+        
+        if RootPart and (BringPosition - RootPart.Position).Magnitude <= Settings.BringDistance then
+            if not RootPart:FindFirstChild("BodyVelocity") then
+                local BV = Instance.new("BodyVelocity", RootPart)
+                BV.Velocity = Vector3.zero;
+                BV.MaxForce = Vector3.one * math.huge;
+            end
+            
+            RootPart.Size = Vector3.one * 50;
+            RootPart.CFrame = EnemyRootPart.CFrame;
+            RootPart.CanCollide = false
+        end
+    end
+end
+
 Module.TweenBodyVelocity = (function()
 	local BodyVelocity = Instance.new("BodyVelocity")
 		BodyVelocity.Velocity = Vector3.zero
