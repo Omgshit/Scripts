@@ -24,6 +24,7 @@ Module.RunFunctions = {} do
                 return Method
             end
         end
+        Settings.RunningOption, Settings.RunningMethod = nil, nil
     end
     spawn(function()
         while task.wait(Settings.SmoothMode and 0.25 or 0) do
