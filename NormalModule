@@ -12,6 +12,20 @@ local Player = Players.LocalPlayer;
 local Module = {};
 
 Module.RunFunctions = {} do
+   Module.RunFunctions.FarmQueue = function(Options)
+        for _, Option in Options do
+            Settings.RunningOption = Option.Name
+            local Method = Option.Function()
+            if Method then
+                if type(Method) == "string" then
+                    Settings.RunningMethod = Method
+                end
+                return Method
+            end
+        end
+        Settings.RunningOption, Settings.RunningMethod = nil, nil
+end
+	
 	Module.RunFunctions.TweenCreator = function()
 		local TweenCreator = {}
 		TweenCreator.__index = TweenCreator
