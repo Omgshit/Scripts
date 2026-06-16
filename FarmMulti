@@ -1,10 +1,6 @@
 local Settings, Connections = ...
 
 local _ENV = (getgenv or getrenv or getfenv)()
-
-local ReplicatedStorage: ReplicatedStorage = game:GetService("ReplicatedStorage");
-local TweenService: TweenService = game:GetService("TweenService");
-local RunService: RunService = game:GetService("RunService");
 local Players: Players = game:GetService("Players");
 
 local Player = Players.LocalPlayer;
