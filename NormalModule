@@ -193,6 +193,8 @@ Module.TweenBodyVelocity = (function()
 			local BodyVelocity = _ENV.tween_bodyvelocity
 			
 			if _ENV.OnFarm and RootPart and Humanoid and Humanoid.Health > 0 then
+                BodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                BodyVelocity.P = 1000
 				if BodyVelocity.Parent ~= RootPart then
 					BodyVelocity.Parent = RootPart
 				end
