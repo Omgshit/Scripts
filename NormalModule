@@ -193,7 +193,7 @@ Module.TweenBodyVelocity = (function()
 			local BodyVelocity = _ENV.tween_bodyvelocity
 			
 			if _ENV.OnFarm and RootPart and Humanoid and Humanoid.Health > 0 then
-                for _, v in ipairs(RootPart:GetChildren()) do if v:IsA("BodyVelocity") and v.Name ~= "BodyVelocity" then v:Destroy() end end
+                if game.GameId ~= 9186719164 then for _, v in ipairs(RootPart:GetChildren()) do if v:IsA("BodyVelocity") and v.Name ~= "BodyVelocity" then v:Destroy() end end end
 				if BodyVelocity.Parent ~= RootPart then
 					BodyVelocity.Parent = RootPart
 				end
