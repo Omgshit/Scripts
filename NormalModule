@@ -184,11 +184,22 @@ Module.TweenBodyVelocity = (function()
 						BasePart.CanTouch = true
 					end
 				end
+            elseif Character:FindFirstChild("Root") and (not Character.Root.CanCollide or not Character.Root.CanTouch) then
+				for i = 1, #BaseParts do
+					local BasePart = BaseParts[i]
+					
+					if CanCollideObjects[BasePart] then
+						BasePart.CanCollide = true
+					end
+					if CanTouchObjects[BasePart] then
+						BasePart.CanTouch = true
+					end
+				end
 			end
 		end
 		
 		local function UpdateVelocityOnStepped(Character)
-			local RootPart = Character and Character:FindFirstChild("HumanoidRootPart")
+			local RootPart = Character and Character:FindFirstChild("HumanoidRootPart") or Character:FindFirstChild("Root")
 			local Humanoid = Character and Character:FindFirstChild("Humanoid")
 			local BodyVelocity = _ENV.tween_bodyvelocity
 			
